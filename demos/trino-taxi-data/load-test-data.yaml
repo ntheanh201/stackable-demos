@@ -20,6 +20,7 @@ spec:
               MINIO_ENDPOINT="https://minio.default.svc.cluster.local:9000/"
               MINIO_ACCESS_KEY=$(cat /minio-s3-credentials/accessKey)
               MINIO_SECRET_KEY=$(cat /minio-s3-credentials/secretKey)
+              export MC_CONFIG_DIR=/.mc/certs
 
               cd /tmp
               for month in \
@@ -27,7 +28,7 @@ spec:
               2020-11 2020-12 2021-01 2021-02 2021-03 2021-04 2021-05 2021-06 2021-07 2021-08 \
               2021-09 2021-10 2021-11 2021-12 2022-01 2022-02 2022-03 2022-04; do
                 curl -O "https://repo.stackable.tech/repository/misc/ny-taxi-data/yellow_tripdata_$month.parquet"
-                mc alias set minio "$MINIO_ENDPOINT" "$MINIO_ACCESS_KEY" "$MINIO_SECRET_KEY" --insecure
+                mc alias set minio "$MINIO_ENDPOINT" "$MINIO_ACCESS_KEY" "$MINIO_SECRET_KEY"
                 mc cp "yellow_tripdata_$month.parquet" minio/demo/ny-taxi-data/raw/
               done
           volumeMounts:
