@@ -9,6 +9,8 @@ spec:
       containers:
         - name: load-ny-taxi-data
           image: "docker.io/bitnami/minio:2024-debian-12"
+          securityContext:
+            fsGroup: 1000
           # yamllint disable-line rule:line-length
           command:
             - bash
