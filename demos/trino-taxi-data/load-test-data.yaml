@@ -13,11 +13,7 @@ spec:
           command:
             - bash
             - -ce
-            - |
-              # Create MC config directory with proper permissions
-              mkdir -p /.mc
-              chmod 700 /.mc
-              
+            - |              
               # Copy the CA cert from the "tls" SecretClass
               cp -v /etc/minio/mc/original_certs/ca.crt /.mc/certs/CAs/public.crt
 
